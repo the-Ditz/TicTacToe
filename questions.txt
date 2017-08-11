@@ -1,0 +1,32 @@
+1.  A header file that defines new types for integers. 
+2.  Using these data types allows for space to be saved becasue the integers wo not require a bit for signing. 
+3.  A BYTE is 8-bits, or 1 byte, a DWORD is 32-bit, or 8 byte, a LONG is a signed 32-bit so 4 bytes, and a WORD is a 16-bit unsigned so 2 bytes. 
+4.  First two bytes identify the file as a BMP - in ASCII it is "B" + "M". In hexadecimal thees are 0x42 and 0x4D.
+5.  biSize is the size of the image, bfSize is the size of the whole file, including headers
+6.  if biheight is negiticve it means the image is top down and will 'begin' in the top-left pixel of the image
+7.  bmiColors
+8.  If there is no file. Or a file by thename gven DNE. 
+9.  Becasue we want to handle one element of data, one file.
+10. 3 (size of = 3)
+11. Scans through the file - from man: The  fseek()  function  sets  the  file position indicator for the stream pointed to by stream.  The new position, measured in bytes, is obtained by adding offset bytes to the position specified by whence.  If whence is set to SEEK_SET,
+       SEEK_CUR, or SEEK_END, the offset is relative to the start of the file, the current position indicator, or end-of-file, respectively.  A successful call to the fseek() function clears the end-of-file indicator for the stream and  undoes
+       any effects of the ungetc(3) function on the same stream.
+12.  The current position indicator
+
+
+Resources used during research:
+
+https://msdn.microsoft.com/en-us/library/dd183376(v=vs.85).aspx
+https://msdn.microsoft.com/en-us/library/dd162939(v=vs.85).aspx
+https://en.wikipedia.org/wiki/C_data_types#stdint.h
+https://msdn.microsoft.com/en-us/library/cc230383.aspx
+https://msdn.microsoft.com/en-us/library/cc230305.aspx
+https://msdn.microsoft.com/en-us/library/cc230318.aspx
+https://msdn.microsoft.com/en-us/library/cc230343.aspx
+https://msdn.microsoft.com/en-us/library/cc230402.aspx
+https://en.wikipedia.org/wiki/BMP_file_format#File_structure
+http://freeimage.sourceforge.net/fnet/html/B4C5405A.htm
+https://www.reddit.com/r/cs50/comments/2azw3k/can_someone_briefly_explain_what_the_value_of/
+
+CS50 Documentation
+C 'man' command
