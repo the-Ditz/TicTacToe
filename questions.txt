@@ -1,0 +1,4 @@
+0. The game allows 3 to 9 on any side. Allowing for 3X3 minSize - 9X9 maxSize.
+1. a multi-dimentional array
+2. greet()
+3. init(), draw(), move(), won()
