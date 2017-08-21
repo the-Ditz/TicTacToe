@@ -1,0 +1,291 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Play
+{% endblock %}
+
+{% block main %}
+
+
+    <!--
+
+    Looked into canvas implementations https://www.w3schools.com/graphics/canvas_intro.asp
+    Hit regions:  https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Hit_regions_and_accessibility
+    Super complete SO entry on click events in JS, was helpfull when figuring out the square selection for T-T-T - https://stackoverflow.com/questions/9880279/how-do-i-add-a-simple-onclick-event-handler-to-a-canvas-element
+    Also helpful when determining click func:  https://www.w3schools.com/jsref/event_onclick.asp  &&  https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick
+    reload func:  https://www.w3schools.com/jsref/met_loc_reload.asp
+
+    -->
+
+
+    <canvas id="leftCanvas" width="262" height="600" style="border:2px solid #000000;"></canvas>
+    <canvas id="myCanvas" width="600" height="600" style="border:0px solid #002b36;"></canvas>
+    <canvas id="rightCanvas" width="262" height="600" style="border:2px solid #000000;"></canvas>
+    <img id="oh" width="0" height="0" src="http://i.imgur.com/JzDdNkf.png" alt="oh">
+    <img id="ex" width="0" height="0" src="http://i.imgur.com/E5jmDaX.png" alt="ex">
+    <img id="p1" width="0" height="0" src="http://i.imgur.com/5znkC8s.png" alt="p1">
+    <img id="p2" width="0" height="0" src="http://i.imgur.com/ERJejAF.png" alt="p2">
+    <img id="stale" width="0" height="0" src="http://i.imgur.com/qjmVBx0.png" alt="stale">
+    <img id="ohLeft" width="0" height="0" src="http://i.imgur.com/MSAT7Az.png" alt="ohLeft">
+    <img id="exRight" width="0" height="0" src="http://i.imgur.com/ck89Dm1.png" alt="stale">
+
+
+<script>
+//left side player nametag
+        var lCanvas = document.getElementById('leftCanvas');
+        var ohLeft = document.getElementById("ohLeft");
+        var ldraw = lCanvas.getContext('2d');
+        ldraw.fillStyle = "#2b3b3f";
+        ldraw.fillRect(0,0,600,600);
+
+        ldraw.drawImage(ohLeft, 0, 0);
+        ldraw.font = "72px Arial";
+        ldraw.fillStyle = "#f2932f";
+        ldraw.fillText("Player 1",10,570,250);
+
+</script>
+
+
+<script>
+
+//game script
+
+//         BOARD
+
+//       columns   0    1    2
+
+//          row0   A1   B1   C1
+
+//          row1   A2   B2   C2
+
+//          row2   A3   B3   C3
+
+    var board = new Array();
+
+    for (var column = 0; column < 3; column++)
+    {
+        board[column]=new Array();
+        for (var row = 0; row < 3; row++)
+        {
+            board[column][row] = 0;
+        }
+    }
+
+    // Canvas Vars
+    var turn = 1;
+    var canvas = document.getElementById('myCanvas'),
+    elemLeft = canvas.offsetLeft,
+    elemTop = canvas.offsetTop,
+    context = canvas.getContext('2d');
+    //A1s = [];
+    var imgO = document.getElementById("oh");
+    var imgX = document.getElementById("ex");
+    var p1 = document.getElementById("p1");
+    var p2 = document.getElementById("p2");
+    var stale = document.getElementById("stale");
+    context.fillStyle = "#000000";
+    context.fillRect(0,198,600,2);
+    context.fillRect(0,398,600,2);
+    context.fillRect(198,0,2,600);
+    context.fillRect(398,0,2,600);
+    var gameover = false;
+    //var winner = 0;
+
+    // Column 'A'
+    square(0, 2, 400, 0);  //3
+    square(0, 1, 200, 0);  //2
+    square(0, 0, 00, 0);  //1
+
+    // Column 'B'
+    square(1, 2, 400, 200);  //3
+    square(1, 1, 200, 200);  //2
+    square(1, 0, 00, 200);  //1
+
+    // Column 'C'
+    square(2, 2, 400, 400);  //3
+    square(2, 1, 200, 400);  //2
+    square(2, 0, 00, 400);  //1
+
+    function square(column, row, yStart, xStart)
+    {
+        // Canvas Vars C1
+        var canvas = document.getElementById('myCanvas'),
+        canvass = [];
+
+        // Add event listener for `click` events.
+        canvas.addEventListener('click', function(event) {
+            var x = event.pageX - elemLeft,
+                y = event.pageY - elemTop;
+
+            // Determines the clicked areas of the TTT board - borrowed and modified https://stackoverflow.com/questions/9880279/how-do-i-add-a-simple-onclick-event-handler-to-a-canvas-element as a starting point and mutated to my needs
+            canvass.forEach(function(element) {
+                if (y > element.top && y < element.top + element.height
+                    && x > element.left && x < element.left + element.width && board[column][row] == 0 && gameover == false) {
+                    if (turn == 1) {
+                        //  Circle  //
+                        context.drawImage(imgO, xStart, yStart);
+                        board[column][row] = 1;
+                        setTimeout(checkWin, 1000);
+                        turn = 2;
+                    }
+                    else if (turn == 2) {
+                        // X //
+                        context.drawImage(imgX, xStart, yStart); //put an 'X' here
+                        board[column][row] = 2; // this space now belogs to P2
+                        setTimeout(checkWin, 1000);
+                        turn = 1; //set back to P1's turn
+                    }
+                    else{
+                    }
+            }
+        });
+
+        }, false);
+
+        // Add a square
+        canvass.push(
+        {
+            colour: '#002b36',
+            width: 198,
+            height: 198,
+            top: yStart,
+            left: xStart
+        });
+
+        // render the square
+        canvass.forEach(function(element)
+        {
+            context.fillStyle = element.colour;
+            context.fillRect(element.left, element.top, element.width, element.height);
+
+        });
+    }
+
+    checkWin(); // call checkwin
+
+    function checkWin(){ // conditionals for all game-end conditions
+        if (((board[0][0] == 1) && (board[0][1] == 1) && (board[0][2] == 1)) && gameover == false) //oh column A win
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[0][0] == 2) && (board[0][1] == 2) && (board[0][2] == 2)) && gameover == false) //ex column A win
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[1][0] == 1) && (board[1][1] == 1) && (board[1][2] == 1)) && gameover == false) //oh column B win
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[1][0] == 2) && (board[1][1] == 2) && (board[1][2] == 2)) && gameover == false) //ex column B win
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[2][0] == 1) && (board[2][1] == 1) && (board[2][2] == 1)) && gameover == false) //oh column C win
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[2][0] == 2) && (board[2][1] == 2) && (board[2][2] == 2)) && gameover == false) //ex column C win
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[0][0] == 1) && (board[1][0] == 1) && (board[2][0] == 1)) && gameover == false) //oh row 1 win
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[0][0] == 2) && (board[1][0] == 2) && (board[2][0] == 2)) && gameover == false) //ex row 1 win
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[0][1] == 1) && (board[1][1] == 1) && (board[2][1] == 1)) && gameover == false) //oh row 2 win
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[0][1] == 2) && (board[1][1] == 2) && (board[2][1] == 2)) && gameover == false) //ex row 2 win
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[0][2] == 1) && (board[1][2] == 1) && (board[2][2] == 1)) && gameover == false) //oh row 3 win
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[0][2] == 2) && (board[1][2] == 2) && (board[2][2] == 2)) && gameover == false) //ex row 3 win
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[0][0] == 1) && (board[1][1] == 1) && (board[2][2] == 1)) && gameover == false) //oh diagonal TL-BR
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[0][0] == 2) && (board[1][1] == 2) && (board[2][2] == 2)) && gameover == false) //ex diagonal TL-BR
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[0][2] == 1) && (board[1][1] == 1) && (board[2][0] == 1)) && gameover == false) //oh diagonal BL-TR
+        {
+            gameover = true;
+            gameOverScreen(p1, 100, 150);
+        }
+        else if (((board[0][2] == 2) && (board[1][1] == 2) && (board[2][0] == 2)) && gameover == false) //ex diagonal BL-TR
+        {
+            gameover = true;
+            gameOverScreen(p2, 100, 150);
+        }
+        else if (((board[0][0] != 0) && (board[0][1] != 0) && (board[0][2] != 0) && (board[1][0] != 0) && (board[1][1] != 0) && (board[1][2] != 0) && (board[2][0] != 0) && (board[2][1] != 0) && (board[2][2] != 0)) && gameover == false) // stalemate
+        {
+            gameover = true;
+            gameOverScreen(stale, 100, 150);
+        }
+    }
+
+    function gameOverScreen(img, x, y)
+    {
+        context.drawImage(img, 100, 150);
+        restart();
+    }
+
+    function restart()
+    {
+        if (gameover == true)
+        {
+            canvas.onclick = function()
+            {
+                location.reload();
+            };
+
+        }
+    }
+
+</script>
+
+
+
+<script>
+//right side player nametag
+        var rCanvas = document.getElementById('rightCanvas');
+        var ohLeft = document.getElementById("exRight");
+        var rdraw = rCanvas.getContext('2d');
+        rdraw.fillStyle = "#2b3b3f";
+        rdraw.fillRect(0,0,600,600);
+
+        rdraw.drawImage(ohLeft, 0, 0);
+        rdraw.font = "72px Arial";
+        rdraw.fillStyle = "#0d6cd0";
+        rdraw.fillText("Player 2",10,570,250);
+
+</script>
+
+{% endblock %}
