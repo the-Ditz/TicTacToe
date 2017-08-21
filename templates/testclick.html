@@ -1,0 +1,575 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Play
+{% endblock %}
+
+{% block main %}
+
+    <!--
+
+    This was the original place i scratched out my code - it is now a dead chunk of code.
+
+    -->
+
+    <canvas id="TicTacToeCanvas" width="600" height="600" style="border:10px solid #000000;"></canvas>
+
+    <script>
+        var canvas = document.getElementById("TicTacToeCanvas");
+        var ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0,0,600,600);
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(0,200,600,1);
+        ctx.fillRect(0,400,600,1);
+        ctx.fillRect(200,0,1,600);
+        ctx.fillRect(400,0,1,600);
+
+
+        canvas.addEventListener('click', function(event) {
+            var x = event.pageX - canvas.offsetLeft;
+            var y = event.pageY - canvas.offsetTop;
+
+
+
+
+
+        });
+
+
+//         MAP
+
+
+//              A    B    C
+
+//          1   -    -    -
+
+//          2   -    -    -
+
+//          3   -    -    -
+
+
+// A column
+
+  // Os
+        //  A1 - Circle  //
+        ctx.beginPath();
+        ctx.arc(100,100,60,0,2*Math.PI);
+        ctx.stroke();
+
+        //  A2 - Circle  //
+        ctx.beginPath();
+        ctx.arc(300,100,60,0,2*Math.PI);
+        ctx.stroke();
+
+        //  A3 - Circle  //
+        ctx.beginPath();
+        ctx.arc(500,100,60,0,2*Math.PI);
+        ctx.stroke();
+
+  // Xs
+        //  A1 - X       //
+        ctx.moveTo(50,50);
+        ctx.lineTo(150,150);
+        ctx.stroke();
+        ctx.moveTo(150,50);
+        ctx.lineTo(50,150);
+        ctx.stroke();
+
+        //  A2 - X       //
+        ctx.moveTo(50,250);
+        ctx.lineTo(150,350);
+        ctx.stroke();
+        ctx.moveTo(150,250);
+        ctx.lineTo(50,350);
+        ctx.stroke();
+
+        //  A3 - X       //
+        ctx.moveTo(50,450);
+        ctx.lineTo(150,550);
+        ctx.stroke();
+        ctx.moveTo(150,450);
+        ctx.lineTo(50,550);
+        ctx.stroke();
+
+
+//B coulumn
+
+  // Os
+
+        //  B1 - Circle  //
+        ctx.beginPath();
+        ctx.arc(100,300,60,0,2*Math.PI);
+        ctx.stroke();
+
+        //  B2 - Circle  //
+        ctx.beginPath();
+        ctx.arc(300,300,60,0,2*Math.PI);
+        ctx.stroke();
+
+        //  B3 - Circle  //
+        ctx.beginPath();
+        ctx.arc(500,300,60,0,2*Math.PI);
+        ctx.stroke();
+
+  // Xs
+        //  A1 - X       //
+        ctx.moveTo(250,50);
+        ctx.lineTo(350,150);
+        ctx.stroke();
+        ctx.moveTo(350,50);
+        ctx.lineTo(250,150);
+        ctx.stroke();
+
+        //  A2 - X       //
+        ctx.moveTo(250,250);
+        ctx.lineTo(350,350);
+        ctx.stroke();
+        ctx.moveTo(350,250);
+        ctx.lineTo(250,350);
+        ctx.stroke();
+
+        //  A3 - X       //
+        ctx.moveTo(250,450);
+        ctx.lineTo(350,550);
+        ctx.stroke();
+        ctx.moveTo(350,450);
+        ctx.lineTo(250,550);
+        ctx.stroke();
+
+
+// C column
+
+
+        //  C1 - Circle  //
+        ctx.beginPath();
+        ctx.arc(100,500,60,0,2*Math.PI);
+        ctx.stroke();
+
+        //  C2 - Circle  //
+        ctx.beginPath();
+        ctx.arc(300,500,60,0,2*Math.PI);
+        ctx.stroke();
+
+        //  C3 - Circle  //
+        ctx.beginPath();
+        ctx.arc(500,500,60,0,2*Math.PI);
+        ctx.stroke();
+
+  // Xs
+        //  A1 - X       //
+        ctx.moveTo(450,50);
+        ctx.lineTo(550,150);
+        ctx.stroke();
+        ctx.moveTo(550,50);
+        ctx.lineTo(450,150);
+        ctx.stroke();
+
+        //  A2 - X       //
+        ctx.moveTo(450,250);
+        ctx.lineTo(550,350);
+        ctx.stroke();
+        ctx.moveTo(550,250);
+        ctx.lineTo(450,350);
+        ctx.stroke();
+
+        //  A3 - X       //
+        ctx.moveTo(450,450);
+        ctx.lineTo(550,550);
+        ctx.stroke();
+        ctx.moveTo(550,450);
+        ctx.lineTo(450,550);
+        ctx.stroke();
+
+
+
+// // Add event listener for `click` events.
+// A1.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     A1s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[0][0] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 0, 0);
+//                 board[0][0] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 0, 0); //put an 'X' here
+//                 board[0][0] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// A1s.push({
+//     colour: '#002b36',
+//     width: 199,
+//     height: 199,
+//     top: 00,
+//     left: 00
+// });
+
+// // Render elements.
+// A1s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+//     // Canvas Vars
+//     var A2 = document.getElementById('myCanvas'),
+//     elemLeft = A2.offsetLeft,
+//     elemTop = A2.offsetTop,
+//     context = A2.getContext('2d'),
+//     A2s = [];
+
+// // Add event listener for `click` events.
+// A2.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     A2s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[0][1] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 0, 201);
+//                 board[0][1] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 0, 201); //put an 'X' here
+//                 board[0][1] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// A2s.push({
+//     colour: '#002b36',
+//     width: 198,
+//     height: 198,
+//     top: 202,
+//     left: 00
+// });
+
+// // Render elements.
+// A2s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+//     // Canvas Vars
+//     var A3 = document.getElementById('myCanvas'),
+//     elemLeft = A3.offsetLeft,
+//     elemTop = A3.offsetTop,
+//     context = A3.getContext('2d'),
+//     A3s = [];
+
+
+
+// // Add event listener for `click` events.
+// A3.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     A3s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[0][2] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 0, 400);
+//                 board[0][2] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 0, 400); //put an 'X' here
+//                 board[0][2] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// A3s.push({
+//     colour: '#002b36',
+//     width: 199,
+//     height: 199,
+//     top: 402,
+//     left: 00
+// });
+
+// // Render elements.
+// A3s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+//     // Canvas Vars B1
+//     var B1 = document.getElementById('myCanvas'),
+//     B1s = [];
+
+// // Add event listener for `click` events.
+// B1.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     B1s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[1][0] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 200, 0);
+//                 board[1][0] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 200, 0); //put an 'X' here
+//                 board[1][0] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// B1s.push({
+//     colour: '#002b36',
+//     width: 198,
+//     height: 198,
+//     top: 0,
+//     left: 202
+// });
+
+// // Render elements.
+// B1s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+
+//     // Canvas Vars B2
+//     var B2 = document.getElementById('myCanvas'),
+//     B2s = [];
+
+// // Add event listener for `click` events.
+// B2.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     B2s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[1][1] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 200, 200);
+//                 board[1][1] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 200, 200); //put an 'X' here
+//                 board[1][1] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// B2s.push({
+//     colour: '#002b36',
+//     width: 198,
+//     height: 198,
+//     top: 202,
+//     left: 202
+// });
+
+// // Render elements.
+// B2s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+//     // Canvas Vars B3
+//     var B3 = document.getElementById('myCanvas'),
+//     B3s = [];
+
+// // Add event listener for `click` events.
+// B3.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     B3s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[1][2] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 200, 400);
+//                 board[1][2] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 200, 400); //put an 'X' here
+//                 board[1][2] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// B3s.push({
+//     colour: '#002b36',
+//     width: 198,
+//     height: 198,
+//     top: 402,
+//     left: 202
+// });
+
+// // Render elements.
+// B3s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+// // Canvas Vars B3
+//     var B3 = document.getElementById('myCanvas'),
+//     B3s = [];
+
+// // Add event listener for `click` events.
+// B3.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     B3s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[1][2] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 200, 400);
+//                 board[1][2] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 200, 400); //put an 'X' here
+//                 board[1][2] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// B3s.push({
+//     colour: '#002b36',
+//     width: 198,
+//     height: 198,
+//     top: 402,
+//     left: 202
+// });
+
+// // Render elements.
+// B3s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+// // Canvas Vars C1
+//     var B3 = document.getElementById('myCanvas'),
+//     B3s = [];
+
+// // Add event listener for `click` events.
+// B3.addEventListener('click', function(event) {
+//     var x = event.pageX - elemLeft,
+//         y = event.pageY - elemTop;
+
+//     // Collision detection between clicked offset and element.
+//     B3s.forEach(function(element) {
+//         if (y > element.top && y < element.top + element.height
+//             && x > element.left && x < element.left + element.width && board[1][2] == 0) {
+//             if (turn == 1) {
+//                 //  A12 - Circle  //
+//                 context.drawImage(imgO, 200, 400);
+//                 board[1][2] = 1;
+//                 turn = 2;
+//             }
+//             else if (turn == 2) {
+//                 //  A12 - X //
+//                 context.drawImage(imgX, 200, 400); //put an 'X' here
+//                 board[1][2] = 2; // this space now belogs to P2
+//                 turn = 1; //set back to P1's turn
+//             }
+//             else{
+//             }
+//     }
+// });
+
+// }, false);
+
+// // Add element.
+// B3s.push({
+//     colour: '#002b36',
+//     width: 198,
+//     height: 198,
+//     top: 402,
+//     left: 202
+// });
+
+// // Render elements.
+// B3s.forEach(function(element) {
+//     context.fillStyle = element.colour;
+//     context.fillRect(element.left, element.top, element.width, element.height);
+// });
+
+
+
+    </script>
+<script>
+console.log('Fifte')
+</script>
+
+{% endblock %}
